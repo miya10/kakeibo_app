@@ -4,6 +4,7 @@ from flask import Flask, Response, jsonify, request
 from flask_cors import CORS
 
 from module.register import *
+from module.table import *
 
 app = Flask(__name__)
 CORS(app)
@@ -33,6 +34,19 @@ def login():
         'status': status,
         'message': message
     }
+    return jsonify(res)
+
+@app.route('/get_table', methods=['POST'])
+def table():
+    data = request.get_json()
+    user = data['user']
+
+    table_name = user.replace('@', '_').replace('-', '_').replace('.', '_')
+    table_arr = get_table(table_name)
+    res = {
+        'table': table_arr
+    }
+    print(res)
     return jsonify(res)
 
 if __name__ == '__main__':

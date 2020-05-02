@@ -21,6 +21,13 @@ def register(email, user_name, password):
         message = '全ての項目を入力してください。'
     elif len(cur.fetchall()) == 0:
         cur.execute('INSERT INTO user_data VALUES("{}","{}","{}")'.format(email, user_name, password))
+        table_name = email.replace('@', '_').replace('-', '_').replace('.', '_')
+        cur.execute('''CREATE TABLE {} (
+                date date,
+                detail varchar(50),
+                category varchar(50),
+                amount int(10)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;'''.format(table_name))
         conn.commit()
         status = 'Success'
         message = ''

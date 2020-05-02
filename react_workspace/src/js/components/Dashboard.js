@@ -5,27 +5,22 @@ import { Table, Button, Col, Container, Row, Form }  from 'react-bootstrap';
 export default class Kakeibo extends React.Component {
 
   getTable() {
-    axios.post('http://localhost:5000/signup', req)
+    const req = {'user': this.props.location.state.email};
+    axios.post('http://localhost:5000/get_table', req)
       .then((results) => {
         const data = results.data;
-        console.log(data);
-        this.setState({alert: data.message});
-        if (data.status == 'Success') {
-          this.props.history.push({
-            pathname: '/dashboard',
-            state: { email: this.formEmail.value}
-          });
-        }
+        return data.table;
       },
       )
       .catch(() => {
         console.log('APIコールに失敗しました。');
       });
-    return arr;
   }
 
   renderTable() {
-    const arr = [['Red','Yellow','Green','Blue','V'],['id2','Yellow','Green','Blue','Violet']];
+    // const arr = [['Red','Yellow','Green','Blue','V'],['id2','Yellow','Green','Blue','Violet']];
+    const arr = this.table_arr;
+    console.log(arr)
     const rows = arr.map((val,index) =>
       <tr key={val}>
         <td>{val[0]}</td>
@@ -75,6 +70,9 @@ export default class Kakeibo extends React.Component {
 
               <Button variant="primary" type="submit" onClick={this.handleSignup}>
                 新規登録
+              </Button>
+              <Button variant="primary" type="submit" onClick={this.handleSignup}>
+                リロード
               </Button>
             </Form>
           </Col>
