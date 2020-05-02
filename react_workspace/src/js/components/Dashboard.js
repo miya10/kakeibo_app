@@ -1,7 +1,58 @@
 import React from "react";
-import { Table, Button, Col, Container, Row, Form  }  from 'react-bootstrap';
+import axios from 'axios';
+import { Table, Button, Col, Container, Row, Form }  from 'react-bootstrap';
 
 export default class Kakeibo extends React.Component {
+
+  getTable() {
+    axios.post('http://localhost:5000/signup', req)
+      .then((results) => {
+        const data = results.data;
+        console.log(data);
+        this.setState({alert: data.message});
+        if (data.status == 'Success') {
+          this.props.history.push({
+            pathname: '/dashboard',
+            state: { email: this.formEmail.value}
+          });
+        }
+      },
+      )
+      .catch(() => {
+        console.log('APIコールに失敗しました。');
+      });
+    return arr;
+  }
+
+  renderTable() {
+    const arr = [['Red','Yellow','Green','Blue','V'],['id2','Yellow','Green','Blue','Violet']];
+    const rows = arr.map((val,index) =>
+      <tr key={val}>
+        <td>{val[0]}</td>
+        <td>{val[1]}</td>
+        <td>{val[2]}</td>
+        <td>{val[3]}</td>
+        <td><Button>削除</Button></td>
+      </tr>
+    );
+    
+    return (
+      <Table hover>  
+        <thead>
+          <tr>
+            <th>日付</th>
+            <th>用途</th>
+            <th>カテゴリ</th>
+            <th>金額</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows}
+        </tbody>
+      </Table>
+    )
+  }
   render() {
     return (
       // <Button>{this.props.location.state.email}</Button>
@@ -28,35 +79,7 @@ export default class Kakeibo extends React.Component {
             </Form>
           </Col>
         </Row>
-        <Table hover>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Username</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td colSpan="2">Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
-        </Table>
+        {this.renderTable()}
       </Container>
     );
   }
