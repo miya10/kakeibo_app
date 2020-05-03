@@ -46,7 +46,40 @@ def table():
     res = {
         'table': table_arr
     }
-    print(res)
+    return jsonify(res)
+
+@app.route('/add_item', methods=['POST'])
+def add():
+    data = request.get_json()
+    user = data['user']
+    date = data['date']
+    detail = data['detail']
+    category = data['category']
+    amount = data['amount']
+
+    table_name = user.replace('@', '_').replace('-', '_').replace('.', '_')
+    status, message = add_item(table_name, date, detail, category, amount)
+    res = {
+        'status': status,
+        'message': message
+    }
+    return jsonify(res)
+
+@app.route('/delete_item', methods=['POST'])
+def delete():
+    data = request.get_json()
+    user = data['user']
+    date = data['date']
+    detail = data['detail']
+    category = data['category']
+    amount = data['amount']
+
+    table_name = user.replace('@', '_').replace('-', '_').replace('.', '_')
+    status, message = delete_item(table_name, date, detail, category, amount)
+    res = {
+        'status': status,
+        'message': message
+    }
     return jsonify(res)
 
 if __name__ == '__main__':

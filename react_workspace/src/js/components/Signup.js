@@ -26,7 +26,7 @@ export default class Signup extends React.Component {
       },
       )
       .catch(() => {
-        console.log('APIコールに失敗しました。');
+        console.log('ユーザー作成に失敗しました。');
       });
     }
 

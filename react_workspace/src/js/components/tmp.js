@@ -27,7 +27,7 @@ export default class Login extends React.Component {
       },
       )
       .catch(() => {
-        console.log('ログイン処理に失敗しました。');
+        console.log('APIコールに失敗しました。');
       });
     }
     
