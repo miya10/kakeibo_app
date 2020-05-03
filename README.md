@@ -18,3 +18,4 @@ access to `http://localhost:8080`
 - Show graph
 - Select month
 - conda -> venv
+- sort table
