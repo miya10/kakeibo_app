@@ -1,4 +1,7 @@
 # Environment
+- React
+- Flask
+- MySQL
 
 # Execution command
 ```
