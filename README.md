@@ -9,6 +9,8 @@ git clone https://github.com/miya10/kakeibo_app.git
 cd react_workspace
 npm start
 cd ../flack_workspace
+source venv/bin/activate
+pip install -r requirement.txt
 python api.py
 ```
 access to `http://localhost:8080`
