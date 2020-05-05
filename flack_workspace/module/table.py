@@ -16,10 +16,11 @@ def get_table(table_name):
     cur.execute("USE kakeibo")
     
     cur.execute('''SELECT DATE_FORMAT(date, "%Y/%m/%d"),
-                        detail,
-                        category,
-                        amount
-                        FROM {}
+                    detail,
+                    category,
+                    amount
+                    FROM {}
+                    ORDER BY date
                 '''.format(table_name))
     table_arr = cur.fetchall()
 
