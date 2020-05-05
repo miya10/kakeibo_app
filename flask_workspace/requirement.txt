@@ -1,0 +1,5 @@
+mysql-connector-python
+japanize_matplotlib
+flask
+flask_cors
+pandas
