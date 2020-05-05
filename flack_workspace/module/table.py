@@ -47,6 +47,7 @@ def add_item(table_name, date, detail, category, amount):
         return status, message
 
     cur.execute('SELECT * FROM {} WHERE date = "{}" AND detail = "{}" AND category = "{}" AND amount = "{}" limit 1'.format(table_name, date, detail, category, amount))
+
     if len(cur.fetchall()) == 0:
         try:
             cur.execute('INSERT INTO {} VALUES("{}","{}","{}","{}")'.format(table_name, date, detail, category, amount))
@@ -56,7 +57,7 @@ def add_item(table_name, date, detail, category, amount):
         except:
             status = 'Failed'
             message = '不正な入力です。'
-    elif len(cur.fetchall()) == 1:
+    else:
         status = 'Failed'
         message = '同一アイテムが既に存在します。'
         
