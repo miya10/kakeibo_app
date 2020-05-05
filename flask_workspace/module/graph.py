@@ -37,7 +37,7 @@ def draw_graph(arr):
         arr = [(0, 0, 0)]
     df = pd.DataFrame(arr)
     df.columns = ['date', 'category', 'amount']
-    fig = plt.figure(figsize=(8, 4))
+    fig = plt.figure(figsize=(7, 4))
     ax = fig.add_subplot(1,1,1)
     df=df.pivot_table( values ='amount',index = ['date'], columns = ['category'], aggfunc = sum )
 

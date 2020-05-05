@@ -67,7 +67,6 @@ export default class Dashboard extends React.Component {
       .then((results) => {
         const data = results.data;
         console.log(data);
-        console.log(data.graph_path);
         this.setState({table: data.table, graph_path: data.graph_path});
       },
       )
@@ -78,7 +77,6 @@ export default class Dashboard extends React.Component {
 
   renderTable() {
     const arr = this.state.table;
-    // const graph = require('../../images/figure.png');
     const rows = arr.map((val,index) =>
       <tr key={val}>
         <td>{val[0]}</td>
@@ -92,25 +90,25 @@ export default class Dashboard extends React.Component {
     return (
       <Row>
         <Col>
-      <Table hover>  
-        <thead>
-          <tr>
-            <th>日付</th>
-            <th>用途</th>
-            <th>カテゴリ</th>
-            <th>金額</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows}
-        </tbody>
-      </Table>
-      </Col>
-      <Col>
-        <img src={this.state.graph_path}/>
-      </Col>
-    </Row>
+          <Table hover>  
+            <thead>
+              <tr>
+                <th>日付</th>
+                <th>用途</th>
+                <th>カテゴリ</th>
+                <th>金額</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows}
+            </tbody>
+          </Table>
+        </Col>
+        <Col>
+          <img src={this.state.graph_path}/>
+        </Col>
+      </Row>
     )
   }
   render() {

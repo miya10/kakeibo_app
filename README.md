@@ -15,8 +15,8 @@ access to `http://localhost:8080`
 
 # Future work
 - Admin site(done)
-- Show graph(developing)
-- Select month
+- Show graph(done)
+- Select month(next)
 - conda -> venv
 - sort table(done)
-- determine password format
+- restrict password format
