@@ -14,8 +14,8 @@ python api.py
 access to `http://localhost:8080`
 
 # Future work
-- Admin site
-- Show graph
+- Admin site(done)
+- Show graph(developing)
 - Select month
 - conda -> venv
 - sort table
