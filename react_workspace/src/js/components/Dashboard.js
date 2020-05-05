@@ -2,7 +2,7 @@ import React from "react";
 import axios from 'axios';
 import { Table, Button, Col, Container, Row, Form, Alert }  from 'react-bootstrap';
 
-export default class Kakeibo extends React.Component {
+export default class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {table: [], alert: ''};

@@ -1,7 +1,7 @@
 import mysql.connector
 import configparser
 
-def register(email, user_name, password):
+def signup(email, user_name, password):
     inifile = configparser.ConfigParser()
     inifile.read("config/database.ini")
 
@@ -38,7 +38,7 @@ def register(email, user_name, password):
     conn.close()
     return status, message
 
-def check_user(email, password):
+def login(email, password):
     inifile = configparser.ConfigParser()
     inifile.read("config/database.ini")
 

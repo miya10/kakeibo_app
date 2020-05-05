@@ -64,6 +64,13 @@ export default class Login extends React.Component {
             </Link>
           </Col>
         </Row>
+        <Row className='text-center' style={{padding: 15}}>
+          <Col>
+            <Link to='/admin_login'>
+              <Button variant='light'>管理者はこちらから</Button>
+            </Link>
+          </Col>
+        </Row>
       </Container>
     );
   }
