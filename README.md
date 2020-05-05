@@ -22,4 +22,5 @@ access to `http://localhost:8080`
 - conda -> venv
 - sort table(done)
 - restrict password format
-- requirement.txt
+- requirement.txt(done)
+- fix color in graph
