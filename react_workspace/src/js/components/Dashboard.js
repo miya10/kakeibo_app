@@ -1,11 +1,12 @@
 import React from "react";
 import axios from 'axios';
 import { Table, Button, Col, Container, Row, Form, Alert }  from 'react-bootstrap';
+// import graphImage from '../../images/figure.png';
 
 export default class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {table: [], alert: ''};
+    this.state = {table: [], alert: '', graph_path: ''};
     this.reloadTable = this.reloadTable.bind(this);
     this.renderTable = this.renderTable.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
@@ -39,26 +40,26 @@ export default class Dashboard extends React.Component {
       });
     }
 
-    handleDelete(date, detail, category, amount) {
-      const req = {
-        'user': this.props.location.state.email,
-        'date': date,
-        'detail': detail,
-        'category': category,
-        'amount': amount };
-      axios.post('http://localhost:5000/delete_item', req)
-        .then((results) => {
-          const data = results.data;
-          console.log(data);
-          if (data.status == 'Success') {
-            this.reloadTable();
-          }
-        },
-        )
-        .catch(() => {
-          console.log('アイテム削除に失敗しました。');
-        });
-      }
+  handleDelete(date, detail, category, amount) {
+    const req = {
+      'user': this.props.location.state.email,
+      'date': date,
+      'detail': detail,
+      'category': category,
+      'amount': amount };
+    axios.post('http://localhost:5000/delete_item', req)
+      .then((results) => {
+        const data = results.data;
+        console.log(data);
+        if (data.status == 'Success') {
+          this.reloadTable();
+        }
+      },
+      )
+      .catch(() => {
+        console.log('アイテム削除に失敗しました。');
+    });
+  }
 
   reloadTable(){
     const req = {'user': this.props.location.state.email};
@@ -66,7 +67,8 @@ export default class Dashboard extends React.Component {
       .then((results) => {
         const data = results.data;
         console.log(data);
-        this.setState({table: data.table});
+        console.log(data.graph_path);
+        this.setState({table: data.table, graph_path: data.graph_path});
       },
       )
       .catch(() => {
@@ -76,6 +78,7 @@ export default class Dashboard extends React.Component {
 
   renderTable() {
     const arr = this.state.table;
+    // const graph = require('../../images/figure.png');
     const rows = arr.map((val,index) =>
       <tr key={val}>
         <td>{val[0]}</td>
@@ -87,6 +90,8 @@ export default class Dashboard extends React.Component {
     );
     
     return (
+      <Row>
+        <Col>
       <Table hover>  
         <thead>
           <tr>
@@ -101,6 +106,11 @@ export default class Dashboard extends React.Component {
           {rows}
         </tbody>
       </Table>
+      </Col>
+      <Col>
+        <img src={this.state.graph_path}/>
+      </Col>
+    </Row>
     )
   }
   render() {
@@ -152,7 +162,8 @@ export default class Dashboard extends React.Component {
             <Alert style={{ color: 'red' }} >{alert}</Alert>
           </Col>
         </Row>
-        {this.renderTable()}
+            {this.renderTable()}
+          
       </Container>
     );
   }

@@ -18,4 +18,5 @@ access to `http://localhost:8080`
 - Show graph(developing)
 - Select month
 - conda -> venv
-- sort table
+- sort table(done)
+- determine password format

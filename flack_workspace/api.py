@@ -2,10 +2,13 @@ import os
 import json
 from flask import Flask, Response, jsonify, request
 from flask_cors import CORS
+import matplotlib
+matplotlib.use('Agg')
 
 from module.register import *
 from module.table import *
 from module.admin import *
+from module.graph import *
 
 app = Flask(__name__)
 CORS(app)
@@ -77,8 +80,11 @@ def handle_get_table():
 
     table_name = user.replace('@', '_').replace('-', '_').replace('.', '_')
     table_arr = get_table(table_name)
+    graph_path = update_graph(table_name)
+    print(graph_path)
     res = {
-        'table': table_arr
+        'table': table_arr,
+        'graph_path': graph_path
     }
     return jsonify(res)
 
